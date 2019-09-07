@@ -50,7 +50,7 @@ int main() {
     if (err == NSAPI_ERROR_OK) {
     	data = server.getDataPtr();	// Access SocketServer's data buffer via pointer
         server.attach(&onSocketRcvd);	// Attach a callback. It will be called when SocketServer receives data.
-		server.run();
+	server.run();
     }
 
     queue->dispatch_forever();
