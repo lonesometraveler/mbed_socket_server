@@ -48,7 +48,7 @@ int main() {
     
     int err = server.netInit("192.168.1.162", "192.168.1.1", "255.255.255.0");
     if (err == NSAPI_ERROR_OK) {
-    	data = server.getDataPtr();		// Access SocketServer's data buffer via pointer
+    	data = server.getDataPtr();	// Access SocketServer's data buffer via pointer
         server.attach(&onSocketRcvd);	// Attach a callback. It will be called when SocketServer receives data.
 		server.run();
     }
