@@ -59,7 +59,7 @@ int main() {
 
 ```UdpSocketServer``` works exactly the same way. Create an instance and let it run just like ```TcpSocketServer```.
 
-```
+```c++
 #include "UdpSocketServer.h"
 
 UdpSocketServer server(SocketServer_PORT);
