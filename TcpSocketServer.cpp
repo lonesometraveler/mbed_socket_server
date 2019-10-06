@@ -15,6 +15,7 @@ void TcpSocketServer::loop() {
 
     TCPSocket listener;
     TCPSocket* client;
+    bool running = true;
 
     listener.open(net);
     nsapi_error_t error = listener.bind(_port);
@@ -25,12 +26,15 @@ void TcpSocketServer::loop() {
     error = listener.listen(this->setting.backlog);
     if (error != NSAPI_ERROR_OK) {
         NDBG("error %d \r\n", error);
+        running = false;
+    } else {
+        NDBG("Listening on port %d \r\n", _port);
     }
 
     client = listener.accept(NULL);
     client->set_timeout(this->setting.timeout);
     
-    while (true) {
+    while (running) {
         
         nsapi_size_or_error_t size = client->recv(buffer, sizeof(buffer));
 
