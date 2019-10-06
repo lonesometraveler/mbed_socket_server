@@ -14,19 +14,24 @@ osStatus UdpSocketServer::run() {
 void UdpSocketServer::loop() {
 
     UDPSocket listener;
+    bool running = true;
 
     listener.open(net);
     nsapi_error_t error = listener.bind(_port);
     if (error != NSAPI_ERROR_OK) {
         NDBG("error %d \r\n", error);
+        running = false;
+    } else {
+        NDBG("Listening on port %d \r\n", _port);
     }
-    
-    while (true) {
+
+    while (running) {
         
         nsapi_size_or_error_t size = listener.recv(buffer, sizeof(buffer));
 
         if (size > 0) {
             buffer[size] = '\0';
+            NDBG("size %d\r\n", size);
             _mycb.call(size); // callback
         }
 
