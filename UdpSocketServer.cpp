@@ -39,4 +39,6 @@ void UdpSocketServer::loop() {
             NDBG("error %d\r\n", size);
         }
     }
+
+    listener.close();
 }

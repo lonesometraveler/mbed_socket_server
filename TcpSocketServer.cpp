@@ -50,4 +50,6 @@ void TcpSocketServer::loop() {
             client->set_timeout(this->setting.timeout);
         } 
     }
+
+    listener.close();
 }
