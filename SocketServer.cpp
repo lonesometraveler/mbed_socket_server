@@ -48,7 +48,11 @@ void SocketServer::statusCallback(nsapi_event_t status, intptr_t param) {
         NDBG("Local IP address set!\r\n");
         break;
     case NSAPI_STATUS_GLOBAL_UP:
-    NDBG("Global IP address set! [%s] \r\n", net->get_ip_address());
+        {
+            SocketAddress a;
+            net->get_ip_address(&a);
+            NDBG("Global IP address set! [%s] \r\n", a.get_ip_address() ? a.get_ip_address() : "None");
+        }
         break;
     case NSAPI_STATUS_DISCONNECTED:
         NDBG("No connection to network!\r\n");
